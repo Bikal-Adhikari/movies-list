@@ -1,18 +1,23 @@
 import React from "react";
 
-const CustomCard = () => {
+const CustomCard = ({ searchedMovie }) => {
+  const { Poster, Title, imdbRating, Plot } = searchedMovie;
   return (
     <div className="card" style={{ width: "18rem;" }}>
-      <img src="..." className="card-img-top" alt="..." />
-      <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" className="btn btn-primary">
-          Go somewhere
-        </a>
+      <img src={Poster} className="card-img-top" alt="..." />
+      <div className="container">
+        <div className="card-body">
+          <h5 className="card-title">{Title}</h5>
+          <p className="card-text">IMDB Rating: {imdbRating}</p>
+          <p>{Plot.slice(0, 50)}...</p>
+        </div>
+        <div className="d-flex justify-content-between gap-2">
+          <button className="btn btn-warning flex-grow-1">Drama</button>
+          <button className="btn btn-info flex-grow-1">Action</button>
+        </div>
+        <div className="d-grid mt-2 mb-5">
+          <button className="btn btn-danger">Delete</button>
+        </div>
       </div>
     </div>
   );
