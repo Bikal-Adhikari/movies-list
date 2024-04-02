@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomCard from "./CustomCard";
 import fetchFromAPI from "../helpers/axiosHelper";
+import randomCHar from "../helpers/helpers";
 
 // fetchFromAPI  is a function that returns data from the API.
 const SearchForm = () => {
   const [searchStr, setSearchStr] = useState("");
   const [searchedMovie, setSearchedMovie] = useState({});
 
+  useEffect(() => {
+    const c = randomCHar();
+    fetchMovie(c);
+  }, []);
+
   const handelOnChange = (e) => {
     const { value } = e.target;
     setSearchStr(value);
   };
-  const handelOnSubmit = async (e) => {
+  const handelOnSubmit = (e) => {
     e.preventDefault();
-    const movie = await fetchFromAPI(searchStr);
+    fetchMovie(searchStr);
+  };
+
+  const fetchMovie = async (str) => {
+    const movie = await fetchFromAPI(str);
     setSearchedMovie(movie);
   };
   return (
@@ -36,7 +46,9 @@ const SearchForm = () => {
           </form>
         </div>
         <div className="col-md">
-          <CustomCard searchedMovie={searchedMovie} />
+          {searchedMovie?.imdbID && (
+            <CustomCard searchedMovie={searchedMovie} />
+          )}
         </div>
       </div>
     </div>
