@@ -46,8 +46,10 @@ const SearchForm = () => {
           </form>
         </div>
         <div className="col-md">
-          {searchedMovie?.imdbID && (
+          {searchedMovie?.Response === "True" ? (
             <CustomCard searchedMovie={searchedMovie} />
+          ) : (
+            <div className="alert alert-danger">{searchedMovie.Error}</div>
           )}
         </div>
       </div>
