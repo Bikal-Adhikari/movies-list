@@ -4,7 +4,7 @@ import fetchFromAPI from "../helpers/axiosHelper";
 import randomCHar from "../helpers/helpers";
 
 // fetchFromAPI  is a function that returns data from the API.
-const SearchForm = () => {
+const SearchForm = ({ addToMovieList }) => {
   const [searchStr, setSearchStr] = useState("");
   const [searchedMovie, setSearchedMovie] = useState({});
 
@@ -25,6 +25,10 @@ const SearchForm = () => {
   const fetchMovie = async (str) => {
     const movie = await fetchFromAPI(str);
     setSearchedMovie(movie);
+  };
+
+  const func = (mode) => {
+    addToMovieList({ ...searchedMovie, mode });
   };
   return (
     <div className="bg-black p-5 rounded shadow-lg">
@@ -47,7 +51,7 @@ const SearchForm = () => {
         </div>
         <div className="col-md">
           {searchedMovie?.Response === "True" ? (
-            <CustomCard searchedMovie={searchedMovie} />
+            <CustomCard func={func} searchedMovie={searchedMovie} />
           ) : (
             <div className="alert alert-danger">{searchedMovie.Error}</div>
           )}

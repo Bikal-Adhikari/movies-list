@@ -1,6 +1,13 @@
+import { useState } from "react";
+import Display from "./components/Display";
 import SearchForm from "./components/SearchForm";
 
 const App = () => {
+  const [movieList, setMovieList] = useState([]);
+
+  const addToMovieList = (movie) => {
+    setMovieList([...movieList, movie]);
+  };
   return (
     <div className="container text-warning">
       <div className="row">
@@ -12,9 +19,10 @@ const App = () => {
 
       {/* search section */}
 
-      <SearchForm />
+      <SearchForm addToMovieList={addToMovieList} />
 
       {/* movie list section */}
+      <Display movieList={movieList} />
     </div>
   );
 };
