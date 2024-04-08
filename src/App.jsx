@@ -6,7 +6,10 @@ const App = () => {
   const [movieList, setMovieList] = useState([]);
 
   const addToMovieList = (movie) => {
-    setMovieList([...movieList, movie]);
+    // have the filtered array that doesn't includes the movie
+    const newList = movieList.filter((m) => m.imdbID !== movie.imdbID);
+    console.log(newList);
+    setMovieList([...newList, movie]);
   };
   return (
     <div className="container text-warning">

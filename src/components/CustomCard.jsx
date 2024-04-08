@@ -4,7 +4,7 @@ const CustomCard = ({ searchedMovie, func }) => {
   const { Poster, Title, imdbRating, Plot } = searchedMovie;
 
   return (
-    <div className="card" style={{ width: "18rem" }}>
+    <div className="card flex-grow-1" style={{ width: "18rem" }}>
       <img src={Poster} className="card-img-top" alt="..." />
       <div className="container">
         <div className="card-body">

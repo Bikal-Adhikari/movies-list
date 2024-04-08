@@ -1,10 +1,18 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomCard from "./CustomCard";
 
 const Display = ({ movieList }) => {
-  console.log(movieList);
+  const [displayMovie, setDisplayMovie] = useState([]);
+  useEffect(() => {
+    setDisplayMovie(movieList);
+  }, [movieList]);
 
+  const filterMovies = (mode) => {
+    if (mode === "all") return setDisplayMovie(movieList);
+    const filteredArg = movieList.filter((m) => m.mode === mode);
+    setDisplayMovie(filteredArg);
+  };
   return (
     <div className="bg-black mt-5 p-5 rounded">
       <div className="row">
@@ -14,21 +22,34 @@ const Display = ({ movieList }) => {
             role="group"
             aria-label="Basic mixed styles example"
           >
-            <button type="button" className="btn btn-primary">
+            <button
+              onClick={() => filterMovies("all")}
+              type="button"
+              className="btn btn-primary"
+            >
               All
             </button>
-            <button type="button" className="btn btn-warning">
+            <button
+              onClick={() => filterMovies("drama")}
+              type="button"
+              className="btn btn-warning"
+            >
               Drama
             </button>
-            <button type="button" className="btn btn-info">
+            <button
+              onClick={() => filterMovies("action")}
+              type="button"
+              className="btn btn-info"
+            >
               Action
             </button>
           </div>
+          <p className="mt-3">{displayMovie.length} movies found!</p>
         </div>
       </div>
       <div className="row mt-3">
         <div className="col d-flex flex-wrap gap-2">
-          {movieList?.map((searchedMovie) => (
+          {displayMovie?.map((searchedMovie) => (
             <CustomCard
               key={searchedMovie.imdbID}
               searchedMovie={searchedMovie}
