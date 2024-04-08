@@ -29,7 +29,10 @@ const SearchForm = ({ addToMovieList }) => {
 
   const func = (mode) => {
     addToMovieList({ ...searchedMovie, mode });
+    //reset searched movie
+    setSearchedMovie({});
   };
+
   return (
     <div className="bg-black p-5 rounded shadow-lg">
       <div className="row g-5">
@@ -50,9 +53,10 @@ const SearchForm = ({ addToMovieList }) => {
           </form>
         </div>
         <div className="col-md">
-          {searchedMovie?.Response === "True" ? (
+          {searchedMovie?.Response === "True" && (
             <CustomCard func={func} searchedMovie={searchedMovie} />
-          ) : (
+          )}
+          {searchedMovie?.Response === "False" && (
             <div className="alert alert-danger">{searchedMovie.Error}</div>
           )}
         </div>

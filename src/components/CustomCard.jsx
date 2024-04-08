@@ -2,6 +2,7 @@ import React from "react";
 
 const CustomCard = ({ searchedMovie, func }) => {
   const { Poster, Title, imdbRating, Plot } = searchedMovie;
+
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src={Poster} className="card-img-top" alt="..." />

@@ -4,6 +4,7 @@ import CustomCard from "./CustomCard";
 
 const Display = ({ movieList }) => {
   console.log(movieList);
+
   return (
     <div className="bg-black mt-5 p-5 rounded">
       <div className="row">
@@ -25,11 +26,14 @@ const Display = ({ movieList }) => {
           </div>
         </div>
       </div>
-      <div className="row">
-        <div className="col">
-          {movieList?.map((searchedMovie, index) => {
-            return <CustomCard key={index} searchedMovie={searchedMovie} />;
-          })}
+      <div className="row mt-3">
+        <div className="col d-flex flex-wrap gap-2">
+          {movieList?.map((searchedMovie) => (
+            <CustomCard
+              key={searchedMovie.imdbID}
+              searchedMovie={searchedMovie}
+            />
+          ))}
         </div>
       </div>
     </div>
