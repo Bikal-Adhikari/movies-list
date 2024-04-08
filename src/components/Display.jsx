@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import CustomCard from "./CustomCard";
 
-const Display = ({ movieList }) => {
+const Display = ({ movieList, handelOnDelete }) => {
   const [displayMovie, setDisplayMovie] = useState([]);
   useEffect(() => {
     setDisplayMovie(movieList);
@@ -53,6 +53,7 @@ const Display = ({ movieList }) => {
             <CustomCard
               key={searchedMovie.imdbID}
               searchedMovie={searchedMovie}
+              deleteFunc={() => handelOnDelete(searchedMovie.imdbID)}
             />
           ))}
         </div>

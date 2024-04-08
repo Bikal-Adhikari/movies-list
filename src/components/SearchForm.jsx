@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import CustomCard from "./CustomCard";
 import fetchFromAPI from "../helpers/axiosHelper";
@@ -33,6 +34,10 @@ const SearchForm = ({ addToMovieList }) => {
     setSearchedMovie({});
   };
 
+  const handelOnDelete = () => {
+    setSearchedMovie({});
+  };
+
   return (
     <div className="bg-black p-5 rounded shadow-lg">
       <div className="row g-5">
@@ -54,7 +59,11 @@ const SearchForm = ({ addToMovieList }) => {
         </div>
         <div className="col-md">
           {searchedMovie?.Response === "True" && (
-            <CustomCard func={func} searchedMovie={searchedMovie} />
+            <CustomCard
+              func={func}
+              searchedMovie={searchedMovie}
+              deleteFunc={handelOnDelete}
+            />
           )}
           {searchedMovie?.Response === "False" && (
             <div className="alert alert-danger">{searchedMovie.Error}</div>

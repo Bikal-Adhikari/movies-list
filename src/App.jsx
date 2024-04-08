@@ -8,8 +8,14 @@ const App = () => {
   const addToMovieList = (movie) => {
     // have the filtered array that doesn't includes the movie
     const newList = movieList.filter((m) => m.imdbID !== movie.imdbID);
-    console.log(newList);
+
     setMovieList([...newList, movie]);
+  };
+
+  const handelOnDelete = (imdbID) => {
+    if (window.confirm("Are you sure you want to delete this movie?")) {
+      setMovieList(movieList.filter((m) => m.imdbID !== imdbID));
+    }
   };
   return (
     <div className="container text-warning">
@@ -25,7 +31,7 @@ const App = () => {
       <SearchForm addToMovieList={addToMovieList} />
 
       {/* movie list section */}
-      <Display movieList={movieList} />
+      <Display movieList={movieList} handelOnDelete={handelOnDelete} />
     </div>
   );
 };
